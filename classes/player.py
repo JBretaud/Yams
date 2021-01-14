@@ -1,10 +1,10 @@
-"""Joueur
+"""Player
 """
 
 from classes.die import Die
 from classes.score import Score
 
-class Joueur:
+class Player:
     """Joueur
 
     Attributes:
@@ -14,11 +14,12 @@ class Joueur:
 
     """
 
-    def __init__(self, number):
-        self.number = number
-        self.name = ask_name()
+    def __init__(self, name):
+        # self.number = number
+        self.name = name
         self.score = Score(self)
         self.dice = []
+        self.active = False
         for i in range(5):
             self.dice.append(Die())
     
@@ -50,13 +51,16 @@ class Joueur:
             if not die.keep:
                 die.cast()
 
-        print(result)
+    def in_activate(self):
+        self.active = not self.active
     
     def ask_name(self):
         """ Ask for player's name
         Return(str): name of the player
         """
-    
+
+        return "Jean"
+
     def choose_dice(self):
         """Choose the dices to keep and sets their 'keep' attribute to 'True'
         """

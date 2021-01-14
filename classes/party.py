@@ -13,14 +13,14 @@ class Party:
 
     """
 
-    def __init__(self):
-        self.nb_players = self.ask_nb_players()
+    def __init__(self,players):
+        # self.nb_players = self.ask_nb_players()
         self.round = 1
         self.players = []
 
         # generates an array of player according to the number of players
-        for i in range(nb_players):
-            self.players.append(Player(i+1))
+        # for i in range(nb_players):
+        #     self.players.append(Player(i+1))
 
 
     def ask_nb_players(self):
@@ -39,6 +39,15 @@ class Party:
         while self.round <= 13:
             for player in self.players:
                 player.play()
+    
+    def next_player(self):
+        for i in range(len(self.players)):
+            if players[i].active :
+                players[i].in_activate
+                if i == len(self.players):
+                    players[0].in_activate
+                else:    
+                    players[i+1].in_activate
     
 
         

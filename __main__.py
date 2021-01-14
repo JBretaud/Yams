@@ -1,16 +1,13 @@
-from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout, QWidget
-from stylesheet import style
+from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QGridLayout, QWidget,QVBoxLayout
+from classes.BD import BD
+from classes.interface import Interface
+
+
+
 
 app = QApplication([])
-app.setStyleSheet(style)
-window = QWidget()
-layout = QVBoxLayout()
-layout.addWidget(QLabel('Hello World!'))
-button = QPushButton("&Download")
-layout.addWidget(button)
-window.setLayout(layout)
-
-window.show()
+interface = Interface()
+interface.window.show()
 app.exec_()
 # from classes.party import Party
 # party = Party()

@@ -11,14 +11,13 @@ class Die:
     """
 
     def __init__(self):
-        self.value = 1
+        self.value = 6
         self.keep  = False
     
     def cast(self):
         """Throws the die
         Return(int): Random number between 1 and 6
         """
-
         self.value = randint(1,6)
 
     

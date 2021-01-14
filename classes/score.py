@@ -32,7 +32,7 @@ class Score:
         ]
 
         for i in range(14):
-            self.table.append(Case(combinations[i],-1))
+            self.table.append(Case(self.combinations[i],-1))
 
     def score(self, chosen_case):
         """ Player chooses a case and scores in it. If the desired 
@@ -106,5 +106,5 @@ class Score:
 
         score = 0 
         for case in self.table:
-            score += case.value
+            if case.value != -1 : score += case.value
         return score
