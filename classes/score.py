@@ -49,21 +49,21 @@ class Score:
                     score += value
         # --- 3 OF KIND
         elif caseNumber == 7:
-            for key in count.attributes:
-                if count[key] >= 3:
+            for key in '123456':
+                if count[int(key)] >= 3:
                     score = 3 * int(key)
         # --- 4 OF A KIND
         elif caseNumber == 8:
-            for key in count.attributes:
-                if count[key] >= 4:
+            for key in '123456':
+                if count[int(key)] >= 4:
                     score = 4 * int(key)
         # --- FULL HOUSE
         elif caseNumber == 9:
             three = False
             two = False
-            for key in count.attributes:
-                if count[key] == 3: three = True
-                if count[key] == 2: two   = True
+            for key in '123456': 
+                if count[int(key)] == 3: three = True
+                if count[int(key)] == 2: two   = True
             if three and two: score = 25
         # --- SMALL STRAIGHT
         elif caseNumber == 10:
@@ -77,9 +77,9 @@ class Score:
                 score = 40
         # --- YAHTZEE
         elif caseNumber == 12:
-            for key in count.attributes:
-                if count[key] == 5: 
-                    score = 50 
+            for key in '123456':                
+                if count[int(key)] == 5: 
+                    score = 50
         # --- CHANCE
         elif caseNumber == 13:
             score += sum(diceValues)

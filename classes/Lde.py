@@ -10,16 +10,18 @@ from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QGridLayout, QWid
 from PyQt5.QtCore import  QRect
 
 class Lde(QWidget):
-    def __init__(self, player):
+    def __init__(self, player, ee):
         super(Lde,self).__init__()
         self.dice = []
         self.layout = QGridLayout()
         self.update_player(player)
         self.Die_btns = []
-        self.layout.addWidget(Button("Cast",self),1,0,2,0)
+        self.cast_btn = Button("Cast",self, ee)
+        self.layout.addWidget(self.cast_btn,1,0,2,0)
         for i in range(5):
             self.Die_btns.append(BD(player.dice[i],"D"+str(i)))
             self.layout.addWidget(self.Die_btns[i],0,i,1,1)
+        
         
     def set_layout_dice(self, dice = []):
         if dice == [] : dice = self.dice

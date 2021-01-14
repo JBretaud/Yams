@@ -2,6 +2,7 @@
 """
 
 from classes.player import Player
+from classes.interface import Interface
 
 class Party:
     """Party
@@ -13,10 +14,14 @@ class Party:
 
     """
 
-    def __init__(self,players):
+    def __init__(self,players,ee):
         # self.nb_players = self.ask_nb_players()
         self.round = 1
         self.players = []
+        self.interface = Interface(players, ee)
+        @ee.on("points scored")
+        def next_turn():
+            self.next_player()
 
         # generates an array of player according to the number of players
         # for i in range(nb_players):
@@ -42,12 +47,13 @@ class Party:
     
     def next_player(self):
         for i in range(len(self.players)):
-            if players[i].active :
+            if players[i].is_active :
                 players[i].in_activate
                 if i == len(self.players):
                     players[0].in_activate
                 else:    
                     players[i+1].in_activate
+        self.interface.update_active_player()
     
 
         

@@ -1,27 +1,21 @@
 from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QGridLayout, QWidget,QVBoxLayout
 from classes.Lde import Lde
 from classes.player import Player
-from classes.party import Party
 from classes.Bscore import Bscore
 from classes.Lcombination import Lcombination
 from classes.Lscore_players import Lscore_players
 from PyQt5.QtGui import *
 
 class Interface:
-    def __init__(self):
+    def __init__(self, players, ee):
+        self.players = players
         self.window = QWidget()
         self.window.resize(1250,500)
         
-        
-        players=[]
-        players.append(Player('Sonia'))
-        players.append(Player('Jean'))
 
-        self.party = Party(players)
-
-        layout_de = Lde(players[0])
-        layout_player = Lscore_players(players)
-        layout_combinaisons = Lcombination(players[0])
+        self.layout_de = Lde(players[0], ee)
+        self.layout_player = Lscore_players(players)
+        self.layout_combinaisons = Lcombination(players[0], ee)
         self.main_layout = QGridLayout()
 
         self.main_layout.addLayout(layout_combinaisons.layout,0,0,2,1)
@@ -29,5 +23,11 @@ class Interface:
         self.main_layout.addWidget(layout_player.frame,1,1,1,1)
 
         self.window.setLayout(self.main_layout)
+    def update_active_player(self):
+        for player in self.player:
+            if player.is_active:
+                self.layout_de.set_player(player)
+                self.layout_player.set_player(player)
+                self.layout_combinaisons.set_player(player)
 
         
