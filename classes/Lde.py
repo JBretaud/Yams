@@ -13,14 +13,19 @@ class Lde(QWidget):
     def __init__(self, player, ee):
         super(Lde,self).__init__()
         self.dice = []
+        self.Die_btns = []
         self.layout = QGridLayout()
         self.update_player(player)
-        self.Die_btns = []
         self.cast_btn = Button("Cast",self, ee)
-        self.layout.addWidget(self.cast_btn,1,0,2,0)
+        self.layout.addWidget(self.cast_btn,1,0,1,0)
         for i in range(5):
             self.Die_btns.append(BD(player.dice[i],"D"+str(i)))
             self.layout.addWidget(self.Die_btns[i],0,i,1,1)
+        self.disable_btns()
+        @ee.on("cast")
+        def enable_btns():
+            for btn in self.Die_btns:
+                btn.setEnabled(True)
         
         
     def set_layout_dice(self, dice = []):
@@ -40,17 +45,20 @@ class Lde(QWidget):
             self.dice = self.player.dice 
         else:
             self.dice = dice
-        if len(self.layout.findChildren(QPushButton)) > 0 :
-            print(self.layout) 
-            self.set_layout_dice()
-    
+        if len(self.Die_btns) > 0:
+            for i in range(len(self.Die_btns)):
+                self.Die_btns[i].set_die(self.dice[i])
+                self.Die_btns[i].refresh()
+        
     def cast_dice_interface(self):
-        print("cast_dice_interface")
         try:
             self.player.cast_dice()
             for btn in self.Die_btns:
                 btn.refresh()
         except ValueError as error:
             raise error
+    def disable_btns(self):
+        for btn in self.Die_btns:
+            btn.setEnabled(False)
         
         

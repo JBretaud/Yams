@@ -5,9 +5,6 @@ from classes.party import Party
 from classes.player import Player
 from pymitter import EventEmitter
 
-
-
-
 ee = EventEmitter()
 app = QApplication([])
 

@@ -25,8 +25,8 @@ class BD (QPushButton):
     def set_die(self, die):  
     # Change les dés en fonction du joueur
         self.die = die
-        self.path_img = "/pictures/D"+die.value+".png"
-        self.update_style()
+        self.path_img = "/pictures/D"+str(die.value)+".png"
+        self.refresh()
 
     def change_keep(self):
     # Modifie la couleur des dés sélectionnés    

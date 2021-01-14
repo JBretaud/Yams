@@ -21,4 +21,5 @@ class Lscore_player:
     def refresh(self):
         self.label_player = QLabel(self.player.name)
         self.label_score = QLabel(str(self.player.scoresheet.get_current_score()))
+        print(self.label_score.text)
         

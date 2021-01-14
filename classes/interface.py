@@ -12,21 +12,22 @@ class Interface:
         self.window = QWidget()
         self.window.resize(1250,500)
         
-
         self.layout_de = Lde(players[0], ee)
         self.layout_player = Lscore_players(players)
         self.layout_combinaisons = Lcombination(players[0], ee)
         self.main_layout = QGridLayout()
 
-        self.main_layout.addLayout(layout_combinaisons.layout,0,0,2,1)
-        self.main_layout.addLayout(layout_de.layout,0,1,1,1)
-        self.main_layout.addWidget(layout_player.frame,1,1,1,1)
+        self.main_layout.addWidget(self.layout_combinaisons.frame,0,0,2,1)
+        self.main_layout.addLayout(self.layout_de.layout,0,1,1,1)
+        self.main_layout.addWidget(self.layout_player.frame,1,1,1,1)
 
         self.window.setLayout(self.main_layout)
+
     def update_active_player(self):
-        for player in self.player:
+        for player in self.players:
             if player.is_active:
-                self.layout_de.set_player(player)
+                print(player.name)
+                self.layout_de.update_player(player)
                 self.layout_player.set_player(player)
                 self.layout_combinaisons.set_player(player)
 

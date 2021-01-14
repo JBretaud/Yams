@@ -9,10 +9,10 @@ class Bscore(QPushButton):
         self.setText(value)
         self.clicked.connect(self.score_in_square)
         self.square = square
+        self.ee = ee
 
     def score_in_square(self):
         try:
-            print('pouet')
             self.player.score(self.square)
             square_text = 'X' if self.square.value == 0 else '' if self.square.value == -1 else str(self.square.value)
             self.setText(square_text)
@@ -26,7 +26,7 @@ class Bscore(QPushButton):
         self.refresh()
     
     def refresh(self):
-        for square in player.scoresheet.table:
+        for square in self.player.scoresheet.table:
             if square.name == self.square.name:
                 self.square = square
                 break

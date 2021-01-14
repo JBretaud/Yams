@@ -10,8 +10,10 @@ class Button(QPushButton):
         self.clicked.connect(self.test_click)
         self.setStyleSheet("color: #7a7b79; \
                             background-color:#ccdbd4;\
-                            margin:auto;\
-                            border-radius: 5px;")
+                            margin-top:0%;\
+                            border:1px solid;\
+                            border-radius: 5px;\
+                            ")
         self.setFont(QFont('Calibri',20)) 
            
            
