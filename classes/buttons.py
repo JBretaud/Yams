@@ -7,14 +7,17 @@ class Button(QPushButton):
         self.setObjectName(name)
         self.lde = lde
         self.clicked.connect(self.test_click)
-        self.setStyleSheet("color: #646665; \
+        self.setStyleSheet("color: #7a7b79; \
                             background-color:#ccdbd4;\
-                            border: none;\
+                            margin:auto;\
                             border-radius: 5px;")
         self.setFont(QFont('Calibri',20)) 
            
            
     def test_click(self,on_click):
-        print('click')  
-        self.lde.cast_dice_interface()
+        print('click')
+        try:
+            self.lde.cast_dice_interface()
+        except ValueError as error:
+            print(error.args)
         

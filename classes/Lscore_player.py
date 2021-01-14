@@ -9,7 +9,7 @@ class Lscore_player:
         self.player = player
         self.layout = QGridLayout()
         self.label_player = QLabel(player.name)
-        self.label_score = QLabel(str(player.score.get_current_score()))
+        self.label_score = QLabel(str(player.scoresheet.get_current_score()))
         self.layout.addWidget(self.label_player,0,0,1,1)
         self.layout.addWidget(self.label_score,0,1,1,1)
         self.refresh()
@@ -20,5 +20,5 @@ class Lscore_player:
 
     def refresh(self):
         self.label_player = QLabel(self.player.name)
-        self.label_score = QLabel(str(self.player.score.get_current_score()))
+        self.label_score = QLabel(str(self.player.scoresheet.get_current_score()))
         

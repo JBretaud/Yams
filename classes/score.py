@@ -32,22 +32,9 @@ class Score:
         ]
 
         for i in range(14):
-            self.table.append(Case(self.combinations[i],-1))
+            self.table.append(Case(self.combinations[i],-1,i))
 
-    def score(self, chosen_case):
-        """ Player chooses a case and scores in it. If the desired 
-        """
-
-        if chosen_case.value != -1: raise ValueError("A square("+chosen_case.name+") can only be picked once")
-        
-        uppertable = 0
-        for case in self.table:
-            if case.name in self.combinations[0:5]: uppertable += case.value
-            if case.name == chosen_case.name:
-                case.value = chosen_case.value
-        # Fills in the bonus if the uppertable score excedes 63
-        if self.table[6].value == 0 and uppertable >= 63:
-            self.table[6].value = 35
+    
     
     
     def calcScore(self, caseNumber, diceValues):

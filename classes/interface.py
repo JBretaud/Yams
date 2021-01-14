@@ -2,8 +2,10 @@ from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QGridLayout, QWid
 from classes.Lde import Lde
 from classes.player import Player
 from classes.party import Party
+from classes.Bscore import Bscore
 from classes.Lcombination import Lcombination
 from classes.Lscore_players import Lscore_players
+from PyQt5.QtGui import *
 
 class Interface:
     def __init__(self):
@@ -27,3 +29,5 @@ class Interface:
         self.main_layout.addWidget(layout_player.frame,1,1,1,1)
 
         self.window.setLayout(self.main_layout)
+
+        

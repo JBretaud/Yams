@@ -44,8 +44,11 @@ class Lde(QWidget):
     
     def cast_dice_interface(self):
         print("cast_dice_interface")
-        self.player.cast_dice()
-        for btn in self.Die_btns:
-            btn.refresh()
+        try:
+            self.player.cast_dice()
+            for btn in self.Die_btns:
+                btn.refresh()
+        except ValueError as error:
+            raise error
         
         
