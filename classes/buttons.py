@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtGui import QFont
+from tkinter import messagebox as messageBox
 
 class Button(QPushButton):
     def __init__ (self, name, lde, ee):
@@ -22,5 +23,5 @@ class Button(QPushButton):
         try:
             self.lde.cast_dice_interface()
         except ValueError as error:
-            print(error.args)
+            messageBox.showerror('error', error.args)
         

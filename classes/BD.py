@@ -16,6 +16,7 @@ class BD (QPushButton):
         self.ROOT_DIR = ROOT_DIR.replace('\\','/')[0:len(ROOT_DIR)-8]
         self.die = die
         self.path_img = "/pictures/D" + str(self.die.value) + ".png"
+
         self.refresh()
         self.resize(250,250)
         
@@ -29,7 +30,8 @@ class BD (QPushButton):
         self.refresh()
 
     def change_keep(self):
-    # Modifie la couleur des dés sélectionnés    
+    # Modifie la couleur des dés sélectionnés
+        if not self.die.lockable: return
         self.die.keep = not self.die.keep
         self.die.keep = self.die.keep
         self.path_img = "/pictures/D"+str(self.die.value)+("-keep.png" if self.die.keep else ".png")

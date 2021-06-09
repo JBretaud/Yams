@@ -3,6 +3,7 @@
 
 from classes.player import Player
 from classes.interface import Interface
+from tkinter import messagebox as messageBox
 
 class Party:
     """Party
@@ -20,6 +21,7 @@ class Party:
         self.players = players
         self.interface = Interface(players, ee)
         self.players[0].in_activate()
+
         @ee.on("points scored")
         def next_turn():
             self.next_player()
@@ -37,7 +39,7 @@ class Party:
         
         for i in range(len(self.players)):
             if self.players[i].is_active :
-                print(self.players[i].name)
+                # print("Message", "Joueur actif : " + self.players[i].name)
                 self.players[i].in_activate()
                 if i == len(self.players)-1:
                     self.players[0].in_activate()
@@ -46,6 +48,7 @@ class Party:
                     self.players[i+1].in_activate()
                     break
         self.interface.update_active_player()
+       
     
 
         

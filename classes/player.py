@@ -3,6 +3,7 @@
 
 from classes.die import Die
 from classes.score import Score
+from tkinter import messagebox as messageBox
 
 class Player:
     """Joueur
@@ -35,10 +36,14 @@ class Player:
             for die in self.dice:
                 if not die.keep:
                     die.cast()
+                    die.lockable = True
 
     def in_activate(self):
         self.tries = 3
         self.is_active = not self.is_active
+        for die in self.dice:
+            die.value = 6
+            die.keep = False
 
     def get_dice_values(self):
         """
@@ -62,10 +67,10 @@ class Player:
         if chosen_case.value != -1: raise ValueError("The square("+chosen_case.name+") can only be picked once")
         uppertable = 0
         for case in self.scoresheet.table:
-            if case.name in self.scoresheet.combinations[0:5]: uppertable += case.value
+            if case.name in self.scoresheet.combinations[0:6]: uppertable += case.value
         chosen_case.value = self.scoresheet.calcScore(chosen_case.number, self.get_dice_values()) 
         # Fills in the bonus if the uppertable score excedes 63
+        print(uppertable)
         if self.scoresheet.table[6].value == 0 and uppertable >= 63:
             self.scoresheet.table[6].value = 35
-           
-        print(chosen_case.value)    
+            

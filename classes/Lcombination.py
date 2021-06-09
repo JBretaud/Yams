@@ -14,20 +14,14 @@ class Lcombination ():
 
         self.player = player
         self.buttons = []  
+        self.ee = ee
         self.layout = QGridLayout()
 
         self.Lcombi = QLabel('POSSIBLE COMBINATIONS')
         self.Lcombi.setObjectName("Lcombi")
         self.layout.addWidget(self.Lcombi,0,0,1,2)
-
-        for i in range(len(self.player.scoresheet.table)):
-            self.layout.addWidget(QLabel(self.player.scoresheet.table[i].name),i+1,0,1,1)  
-            
-            square_text = 'X' if player.scoresheet.table[i].value == 0 else '' if player.scoresheet.table[i].value == -1 else str(player.scoresheet.table[i].value)
-            
-            btn = Bscore(self.player.scoresheet.table[i], self.player, square_text, ee )
-            self.buttons.append(btn)
-            self.layout.addWidget(btn,i+1,1,1,1)
+        
+        self.update_buttons()
 
         self.frame = QFrame()
         self.frame.setLayout(self.layout)
@@ -68,9 +62,25 @@ class Lcombination ():
     def disable_btns(self):
         for button in self.buttons:
             button.setEnabled(False)
-    def set_player(self,player):
+
+    def set_player(self, player):
         self.player = player
-        self.buttons
+        self.buttons = []
+        self.update_buttons()
+    
+    def update_buttons(self):
+      for i in range(len(self.player.scoresheet.table)):
+            self.layout.addWidget(QLabel(self.player.scoresheet.table[i].name),i+1,0,1,1)  
+            
+            square_text = 'X' if self.player.scoresheet.table[i].value == 0 else '' if self.player.scoresheet.table[i].value == -1 else str(self.player.scoresheet.table[i].value)
+            
+            btn = Bscore(self.player.scoresheet.table[i], self.player, square_text, self.ee )
+            btn.setEnabled(False)
+            self.buttons.append(btn)
+            self.layout.addWidget(btn,i+1,1,1,1)
+          
+      
+
     
     
             

@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtGui import QFont
 from classes.case import Case
+from tkinter import messagebox as messageBox
 
 class Bscore(QPushButton):
     def __init__ (self, square, player, value, ee):
@@ -19,7 +20,7 @@ class Bscore(QPushButton):
             self.refresh()
             self.ee.emit("points scored")
         except ValueError as error:
-            print(error.args)
+            messageBox.showerror('error',error.args)
 
     def set_player(self,player):
         self.player = player
@@ -30,6 +31,6 @@ class Bscore(QPushButton):
             if square.name == self.square.name:
                 self.square = square
                 break
-        self.setEnabled(not self.square.value >= 0)
+     
 
 

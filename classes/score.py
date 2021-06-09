@@ -67,7 +67,9 @@ class Score:
             if three and two: score = 25
         # --- SMALL STRAIGHT
         elif caseNumber == 10:
-            Str = ''.join(str(i) for i in diceValues)
+            Str = ''
+            for i in range(len(diceValues)):
+               Str += str(diceValues[i]) if ( i==0 or str(diceValues[i]) != str(diceValues[i-1]) ) else ''
             if '1234' in Str or '2345' in Str or '3456' in Str:
                 score = 30
         # --- LONG STRAIGHT        

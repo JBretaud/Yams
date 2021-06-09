@@ -2,7 +2,8 @@
 Method: 
 """
 from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QGridLayout, QWidget
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QPalette, QColor
+from tkinter import messagebox as messageBox
 
 class Lscore_player:
     def __init__(self, player):
@@ -19,7 +20,17 @@ class Lscore_player:
         self.refresh()
 
     def refresh(self):
-        self.label_player = QLabel(self.player.name)
-        self.label_score = QLabel(str(self.player.scoresheet.get_current_score()))
-        print(self.label_score.text)
+        palette = self.label_player.palette() 
+        if self.player.is_active :
+            palette.setColor(QPalette.Window, QColor(204, 219, 212))
+        else:
+            palette.setColor(QPalette.Window, QColor(240, 240, 240))
+
+        self.label_player.setPalette(palette)
+        self.label_player.setAutoFillBackground(True)
+        self.label_player.update()
+            
+        self.label_score.setText(str(self.player.scoresheet.get_current_score()))
+
+        
         

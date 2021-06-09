@@ -5,6 +5,7 @@ from classes.Bscore import Bscore
 from classes.Lcombination import Lcombination
 from classes.Lscore_players import Lscore_players
 from PyQt5.QtGui import *
+from tkinter import messagebox as messageBox
 
 class Interface:
     def __init__(self, players, ee):
@@ -24,11 +25,13 @@ class Interface:
         self.window.setLayout(self.main_layout)
 
     def update_active_player(self):
+        self.layout_combinaisons.disable_btns()
         for player in self.players:
+            for die in player.dice:
+                die.lockable = False
+            self.layout_player.set_player(player)
             if player.is_active:
-                print(player.name)
                 self.layout_de.update_player(player)
-                self.layout_player.set_player(player)
                 self.layout_combinaisons.set_player(player)
 
         

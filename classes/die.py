@@ -13,6 +13,7 @@ class Die:
     def __init__(self):
         self.value = 6
         self.keep  = False
+        self.lockable = False
     
     def cast(self):
         """Throws the die
