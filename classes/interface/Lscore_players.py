@@ -1,12 +1,13 @@
 """Lscore_players
 Method: 
 """
-from classes.Lscore_player import Lscore_player
+from classes.interface.Lscore_player import Lscore_player
+from classes.interface.BSave import BSave
 from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QGridLayout, QWidget, QFrame
 from PyQt5.QtGui import QPalette
 
 class Lscore_players:
-    def __init__(self, players):
+    def __init__(self, players, ee):
         self.layout = QGridLayout()
         self.player_layouts = []
 
@@ -22,6 +23,8 @@ class Lscore_players:
         for i in range(len(players)):
             self.player_layouts.append(Lscore_player(players[i]))
             self.layout.addLayout(self.player_layouts[i].layout,i+1,0,1,0)
+            NbLines = i+1
+        self.layout.addWidget(BSave(ee), NbLines+1,0,1,0)
         
         self.frame = QFrame()
         self.frame.setLayout(self.layout)

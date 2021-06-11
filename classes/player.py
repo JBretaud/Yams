@@ -1,6 +1,7 @@
 """Player
 """
 
+from classes.models.ScoreLineRecord import ScoreLineRecord
 from classes.die import Die
 from classes.score import Score
 from tkinter import messagebox as messageBox
@@ -15,15 +16,32 @@ class Player:
 
     """
 
-    def __init__(self, name):
-        # self.number = number
-        self.name = name
+    def __init__(self, name: str, scoreRecord: ScoreLineRecord = None):
+        
         self.scoresheet = Score(self)
         self.dice = []
-        self.is_active = False
-        self.tries = 3
+        try:
+            self.name = scoreRecord.NomJoueur
+            self.is_active = scoreRecord.IsActif > 0
+            self.tries = scoreRecord.Tries
+            self.id = scoreRecord.IdScore
+            points = scoreRecord.getScoreDict()
+            
+            # Alimente la feuille de score du joueur avec les infos de la base de donnée
+            for attr, value in points.items():
+                for i in range(len(self.scoresheet.table)):
+                    if self.scoresheet.table[i].name == attr:
+                        self.scoresheet.table[i].value = value
+
+        except NameError or AttributeError:
+            self.is_active = False
+            self.name = name
+            self.tries = 3
+            self.id = -1
+
         for i in range(5):
             self.dice.append(Die())
+
 
     def cast_dice(self):
         """
@@ -70,7 +88,30 @@ class Player:
             if case.name in self.scoresheet.combinations[0:6]: uppertable += case.value
         chosen_case.value = self.scoresheet.calcScore(chosen_case.number, self.get_dice_values()) 
         # Fills in the bonus if the uppertable score excedes 63
-        print(uppertable)
         if self.scoresheet.table[6].value == 0 and uppertable >= 63:
             self.scoresheet.table[6].value = 35
+    
+    def __str__(self):
+        for attr, value in self.__dict__.items():
+            result = ""
+            result += attr+" : "+str(value)+",\n"
+            
+        return result
+    
+    def toScoreLineRecord(self) -> ScoreLineRecord:
+        cases = []
+        cases.append(-1)
+        cases.append('')
+        cases.append(0)
+        cases.append(1)
+        cases.append(self.name)
+        for case in self.scoresheet.table:
+            cases.append(str(case.value))
+        if self.is_active : 
+            cases.append(1) 
+        else :
+            cases.append(0)
+        cases.append(self.tries)
+        cases.append(self.id)
+        return ScoreLineRecord(tuple(cases))
             

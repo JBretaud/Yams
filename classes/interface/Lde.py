@@ -4,23 +4,26 @@ set_layout_dice, update_player, update_dice,cast_dice_interface
 """
 from classes.player import Player
 from classes.die import Die
-from classes.BD import BD
-from classes.buttons import Button
+from classes.interface.BD import BD
+from classes.interface.buttons import Button
 from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QGridLayout, QWidget
-from PyQt5.QtCore import  QRect
+from PyQt5.QtCore import  QRect, Qt
 
 class Lde(QWidget):
     def __init__(self, player, ee):
         super(Lde,self).__init__()
         self.dice = []
         self.Die_btns = []
+        self.remainingChance = QLabel()
+        self.remainingChance.setText("Chances : "+str(player.tries))
         self.layout = QGridLayout()
         self.update_player(player)
         self.cast_btn = Button("Cast",self, ee)
-        self.layout.addWidget(self.cast_btn,1,0,1,0)
+        self.layout.addWidget(self.cast_btn,2,0,1,0)
+        self.layout.addWidget(self.remainingChance, 1,0,1,0, Qt.AlignBottom)
         for i in range(5):
             self.Die_btns.append(BD(player.dice[i],"D"+str(i)))
-            self.layout.addWidget(self.Die_btns[i],0,i,1,1)
+            self.layout.addWidget(self.Die_btns[i],0,i,0,1)
         self.disable_btns()
         @ee.on("cast")
         def enable_btns():
@@ -39,6 +42,7 @@ class Lde(QWidget):
     def update_player(self, player):
         self.player = player
         self.update_dice()
+        self.update_chances()
 
     def update_dice(self, dice = []):
         if not dice:
@@ -53,6 +57,7 @@ class Lde(QWidget):
     def cast_dice_interface(self):
         try:
             self.player.cast_dice()
+            self.update_chances()
             for btn in self.Die_btns:
                 btn.refresh()
         except ValueError as error:
@@ -60,5 +65,7 @@ class Lde(QWidget):
     def disable_btns(self):
         for btn in self.Die_btns:
             btn.setEnabled(False)
+    def update_chances(self):
+        self.remainingChance.setText("Chances : "+str(self.player.tries))
         
         

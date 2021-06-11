@@ -2,7 +2,8 @@
 """
 from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout, QWidget, QRadioButton, QGridLayout, QFrame
 from classes.score import Score
-from classes.Bscore import Bscore
+from classes.player import Player
+from classes.interface.Bscore import Bscore
 
 class Lcombination ():
     """Lcombination
@@ -10,12 +11,13 @@ class Lcombination ():
     intitule, layout
     """
     
-    def __init__(self, player, ee):
-
+    def __init__(self, player : Player, ee):
         self.player = player
         self.buttons = []  
+        
         self.ee = ee
         self.layout = QGridLayout()
+        
 
         self.Lcombi = QLabel('POSSIBLE COMBINATIONS')
         self.Lcombi.setObjectName("Lcombi")
@@ -69,6 +71,7 @@ class Lcombination ():
         self.update_buttons()
     
     def update_buttons(self):
+      
       for i in range(len(self.player.scoresheet.table)):
             self.layout.addWidget(QLabel(self.player.scoresheet.table[i].name),i+1,0,1,1)  
             

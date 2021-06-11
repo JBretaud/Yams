@@ -13,7 +13,7 @@ class BD (QPushButton):
     def __init__(self,die,name):
         super(BD,self).__init__()
         ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        self.ROOT_DIR = ROOT_DIR.replace('\\','/')[0:len(ROOT_DIR)-8]
+        self.ROOT_DIR = ROOT_DIR.replace('\\','/')[0:len(ROOT_DIR)-18]
         self.die = die
         self.path_img = "/pictures/D" + str(self.die.value) + ".png"
 

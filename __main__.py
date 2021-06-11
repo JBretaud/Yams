@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QGridLayout, QWidget,QVBoxLayout
-from classes.BD import BD
-from classes.interface import Interface
+from PyQt5.QtWidgets import QApplication
+from classes.interface.BD import BD
+from classes.interface.interface import Interface
 from classes.party import Party
 from classes.player import Player
 from pymitter import EventEmitter
